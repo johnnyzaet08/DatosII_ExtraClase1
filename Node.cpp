@@ -12,7 +12,7 @@ class Node{
         T value;
 
         void deletee();
-        //void new(T);
+        void neww(int);
         void print();
 
 };
@@ -31,10 +31,10 @@ Node<T>::Node(T value_){
     next = NULL;
 }
 
-/*template <typename T>
-void Node<T>::new(){
-
-}*/
+template <typename T>
+void Node<T>::neww(int MemoryValue){
+    cout << "Espacio de memoria malloc" << endl;
+}
 
 template <typename T>
 void Node<T>::deletee(){

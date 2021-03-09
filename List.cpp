@@ -11,7 +11,7 @@ class List{
 
         int num_nodes;
         Node<T> *ptr_head;
-        Collector<> *collect;
+        //Collector<> *collect;
         
         void add(T);
         void remove(T);
@@ -28,7 +28,7 @@ List<T>::List(){
 //Insertar elemento
 template <typename T>
 void List<T>::add(T value_){
-    if (collect->empty()){
+    //if (collect->empty()){
         Node<T> *new_node = new Node<T>(value_);
         Node<T> *temp = ptr_head;
         if (!ptr_head){
@@ -40,9 +40,10 @@ void List<T>::add(T value_){
             temp->next = new_node;
         }
         num_nodes++;
-    } else{
-        cout << "aqui va algo porque se agrega jeje" << endl;
-    }
+    //} 
+    //else{
+    //    cout << "aqui va algo porque se agrega jeje" << endl;
+    //}
 }
 
 //Eliminar elemento
@@ -54,7 +55,7 @@ void List<T>::remove(T value_){
 
     if (ptr_head->value == value_){
         ptr_head = temp->next;
-        delete temp;
+        temp->deletee();
     } else{
         while (temp1->value != value_){
             temp = temp1;
@@ -63,7 +64,7 @@ void List<T>::remove(T value_){
         if (temp1->value == value_){
             found = 1;
             temp->next = temp1->next;
-            delete temp1;
+            temp1->deletee();
         }
     }
     if (found == 0) {
