@@ -7,15 +7,16 @@ template <class T>
 class List{
     public:
         List();
-        ~List();
 
         int num_nodes;
-        Node<T> *ptr_head;
-        //Collector<> *collect;
+        Node *ptr_head;
         
         void add(T);
+        float getHead();
+        void remove();
         void remove(T);
         void print();
+        bool empty();
 };
 
 //Constructor
@@ -28,34 +29,43 @@ List<T>::List(){
 //Insertar elemento
 template <typename T>
 void List<T>::add(T value_){
-    //if (collect->empty()){
-        Node<T> *new_node = new Node<T>(value_);
-        Node<T> *temp = ptr_head;
-        if (!ptr_head){
-            ptr_head = new_node;
-        } else{
-            while (temp->next != NULL){
-                temp = temp->next;
-            }
-            temp->next = new_node;
+    Node *new_node = new Node(value_);
+    Node *temp = ptr_head;
+    if (!ptr_head){
+        ptr_head = new_node;
+    } else{
+        while (temp->next != NULL){
+            temp = temp->next;
         }
-        num_nodes++;
-    //} 
-    //else{
-    //    cout << "aqui va algo porque se agrega jeje" << endl;
-    //}
+        temp->next = new_node;
+    }
+    num_nodes++;
+}
+
+//Devuelve dato de cabeza
+template <typename T>
+float List<T>::getHead(){
+    return &ptr_head;
+}
+
+//Eliminar la cabeza
+template <typename T>
+void List<T>::remove(){
+    Node *temp = ptr_head;
+    ptr_head = temp->next;
+    temp->operator delete(temp);
 }
 
 //Eliminar elemento
 template <typename T>
 void List<T>::remove(T value_){
-    Node<T> *temp = ptr_head;
-    Node<T> *temp1 = ptr_head->next;
+    Node *temp = ptr_head;
+    Node *temp1 = ptr_head->next;
     int found = 0;
 
     if (ptr_head->value == value_){
         ptr_head = temp->next;
-        temp->deletee();
+        temp->operator delete(temp);
     } else{
         while (temp1->value != value_){
             temp = temp1;
@@ -64,7 +74,7 @@ void List<T>::remove(T value_){
         if (temp1->value == value_){
             found = 1;
             temp->next = temp1->next;
-            temp1->deletee();
+            temp->operator delete(temp1);
         }
     }
     if (found == 0) {
@@ -75,7 +85,7 @@ void List<T>::remove(T value_){
 //Imprimir lista
 template <typename T>
 void List<T>::print(){
-    Node<T> *temp = ptr_head;
+    Node *temp = ptr_head;
     if(!ptr_head){
         cout << "La Lista esta vacia" << endl;
     } else{
@@ -91,5 +101,13 @@ void List<T>::print(){
     }
 }
 
+//Revisa si la lista esta vacia
 template <typename T>
-List<T>::~List() {}
+bool List<T>::empty(){
+    if (num_nodes == 0){
+        return true;
+    } else{
+        return false;
+    }
+}
+

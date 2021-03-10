@@ -1,51 +1,47 @@
 #include <iostream>
+#include <stdlib.h>
+
 using namespace std;
 
-template <class T>
 class Node{
     public:
-        Node();
-        Node(T);
-        ~Node();
+        Node(int Value);
 
+        //Collector *Collect;
 		Node *next;
-        T value;
+        int value;
 
-        void deletee();
-        void neww(int);
+        void operator delete(void*);
+        void* operator new(size_t);
         void print();
 
 };
 
-//Constructor 1
-template <typename T>
-Node<T>::Node(){
-    value == NULL;
-    next == NULL;
-}
-
-//Constructor 2
-template <typename T>
-Node<T>::Node(T value_){
+//Constructor
+Node::Node(int value_){
     value = value_;
     next = NULL;
+    //Collect = NULL;
 }
 
-template <typename T>
-void Node<T>::neww(int MemoryValue){
+//Crear nuevo nodo
+void* Node::operator new(size_t size){
     cout << "Espacio de memoria malloc" << endl;
+    void *node;
+    node = malloc(size);
+    return node;
 }
 
-template <typename T>
-void Node<T>::deletee(){
-    delete this;
+//Eliminar nodo
+void Node::operator delete(void* ptr_node){
+    Node *ptr = (Node*) ptr_node;
+    cout << "aqui va bien" << endl;
+    //Collect->add(&ptr);
+    cout << "parece que paso por el collect bien" << endl;
 }
 
 //Imprimir el valor
-template <typename T>
-void Node<T>::print(){
+void Node::print(){
     cout << value;
 }
 
-template <typename T>
-Node<T>::~Node() {}

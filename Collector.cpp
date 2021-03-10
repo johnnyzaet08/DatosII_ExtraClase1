@@ -1,25 +1,30 @@
 #include <iostream>
+
 #include "List.cpp"
 
 using namespace std;
 
 class Collector{
-    private:
-        List<int> *memory_;
     public:
         Collector();
-        ~Collector();
+
+        List<float> *memoryList;
 
         void remove();
-        void add(int);
+        void add(float);
+        void print();
+        float GetNode();
         bool empty();
 };
 
-Collector::Collector(){}
+//Crea la lista de collector
+Collector::Collector(){
+    memoryList = NULL;
+}
 
 //Revisa si el collector esta vacio
 bool Collector::empty(){
-    if (memory_->num_nodes == 0){
+    if (memoryList->empty()){
         return true;
     } else{
         return false;
@@ -27,15 +32,25 @@ bool Collector::empty(){
 }
 
 //Agregar valor de memoria al collector
-void add(int memoryValue){
-    memory_.add(memoryValue);
+void Collector::add(float memorySize){
+    memoryList->add(memorySize);
+    print();
+}
+
+//Retornar el valor de memoria
+float Collector::GetNode(){
+    float node = memoryList->getHead();
+    return node;
 }
 
 //Elimina una valor de memeoria y del collector
-void remove(){
-    int temp = memory_->ptr_head;
-    memory_.remove(ptr_head->value);
-    return temp;
+void Collector::remove(){
+    memoryList->remove();
+    print();
 }
 
-Collector::~Collector(){}
+//Imprime el collector
+void Collector::print(){
+    memoryList->print();
+}
+

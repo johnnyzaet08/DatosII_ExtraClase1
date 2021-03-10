@@ -9,9 +9,9 @@ int main(){
     int ele;
     int opcion;
 
-    while (opcion != 4){
+    while (opcion != 5){
     
-    cout << "\n1. Agregar elemento \n" << "2. Eliminar elemento \n" << "3. Imprimir lista \n" << "4. Salir \n" << "Ingrese una opcion:  ";
+    cout << "\n1. Agregar elemento \n" << "2. Eliminar elemento \n" << "3. Imprimir lista \n" << "4. Imprime la lista del collector \n" << "5. Salir \n" << "Ingrese una opcion:  ";
     cin >> opcion;
 
     if (opcion == 1){
@@ -23,9 +23,13 @@ int main(){
         cin >> ele;
         list_.remove(ele);
     } else if (opcion == 3){
-        cout << "La lista es:  " << endl;
+        cout << "La lista es:  ";
         list_.print();
-    } else{
+    } /*else if (opcion == 4){
+        cout << "La lista de memoria disponible es:   ";
+        Collector acceder;
+        acceder.print();
+    }*/else{
         return 0;
     }
 
