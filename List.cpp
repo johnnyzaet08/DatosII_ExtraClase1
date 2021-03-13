@@ -1,5 +1,3 @@
-#include "Node.cpp"
-
 using namespace std;
 
 template <class T>
@@ -12,7 +10,7 @@ class List{
         Node *ptr_head;
         
         void add(T);
-        float getHead();
+        Node getHead();
         void remove();
         void remove(T);
         void print();
@@ -44,8 +42,8 @@ void List<T>::add(T value_){
 
 //Devuelve dato de cabeza
 template <typename T>
-float List<T>::getHead(){
-    return &ptr_head;
+Node List<T>::getHead(){
+    return *ptr_head;
 }
 
 //Eliminar la cabeza
@@ -64,12 +62,15 @@ void List<T>::remove(T value_){
     int found = 0;
 
     if (ptr_head->value == value_){
+        found = 1;
         ptr_head = temp->next;
         temp->operator delete(temp);
     } else{
-        while (temp1->value != value_){
+        int contador = 0;        
+        while (temp1->value != value_ && contador < num_nodes){
             temp = temp1;
             temp1 = temp->next;
+            contador++;
         }
         if (temp1->value == value_){
             found = 1;

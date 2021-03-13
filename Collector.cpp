@@ -1,30 +1,49 @@
 #include <iostream>
 
+#include "Node.cpp"
 #include "List.cpp"
 
 using namespace std;
 
-class Collector{
-    public:
-        Collector();
 
-        List<float> *memoryList;
+class Collector{
+    private:
+        static Collector *instance;
+        List<Node> memoryList;
+    
+    public:
+        static Collector *getInstance(){
+            if (instance == NULL){
+                instance = new Collector();
+            } else{
+                return instance;
+            }
+        }
 
         void remove();
-        void add(float);
+        void remove_all();
+        void add(Node);
         void print();
-        float GetNode();
+        Node GetNode();
         bool empty();
+    
+    protected:
+        Collector(){
+            cout << "Creando el collector" << endl;
+        }
+        virtual ~Collector(){
+
+        }
+        Collector(Collector const&);
+        Collector& operator = (Collector const&);
+    
 };
 
-//Crea la lista de collector
-Collector::Collector(){
-    memoryList = NULL;
-}
+Collector *Collector::instance=NULL;
 
 //Revisa si el collector esta vacio
 bool Collector::empty(){
-    if (memoryList->empty()){
+    if (memoryList.empty()){
         return true;
     } else{
         return false;
@@ -32,25 +51,27 @@ bool Collector::empty(){
 }
 
 //Agregar valor de memoria al collector
-void Collector::add(float memorySize){
-    memoryList->add(memorySize);
+void Collector::add(Node memorySize){
+    memoryList.add(memorySize);
     print();
 }
 
 //Retornar el valor de memoria
-float Collector::GetNode(){
-    float node = memoryList->getHead();
+Node Collector::GetNode(){
+    Node node = memoryList.getHead();
     return node;
 }
 
 //Elimina una valor de memeoria y del collector
 void Collector::remove(){
-    memoryList->remove();
-    print();
+	memoryList.remove();
+    this->print();
 }
 
 //Imprime el collector
 void Collector::print(){
-    memoryList->print();
+    cout << memoryList.ptr_head << endl;
+    cout << memoryList.num_nodes << endl;
+    memoryList.print();
 }
 

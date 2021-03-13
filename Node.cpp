@@ -5,9 +5,9 @@ using namespace std;
 
 class Node{
     public:
-        Node(int Value);
+        Node(int);
 
-        //Collector *Collect;
+        //Collector *collect = Collector::getInstance();
 		Node *next;
         int value;
 
@@ -21,12 +21,11 @@ class Node{
 Node::Node(int value_){
     value = value_;
     next = NULL;
-    //Collect = NULL;
 }
 
 //Crear nuevo nodo
 void* Node::operator new(size_t size){
-    cout << "Espacio de memoria malloc" << endl;
+    cout << "Se creo nuevo espacio" << endl;
     void *node;
     node = malloc(size);
     return node;
@@ -36,7 +35,7 @@ void* Node::operator new(size_t size){
 void Node::operator delete(void* ptr_node){
     Node *ptr = (Node*) ptr_node;
     cout << "aqui va bien" << endl;
-    //Collect->add(&ptr);
+    //collect->add(&ptr);
     cout << "parece que paso por el collect bien" << endl;
 }
 

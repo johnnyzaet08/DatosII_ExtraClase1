@@ -1,10 +1,11 @@
 #include <iostream>
 
-#include "List.cpp"
+#include "Collector.cpp"
 
 using namespace std;
 
 int main(){
+    Collector *collect = Collector::getInstance();
     List<int> list_;
     int ele;
     int opcion;
@@ -25,13 +26,10 @@ int main(){
     } else if (opcion == 3){
         cout << "La lista es:  ";
         list_.print();
-    } /*else if (opcion == 4){
+    } else if (opcion == 4){
         cout << "La lista de memoria disponible es:   ";
-        Collector acceder;
-        acceder.print();
-    }*/else{
+        collect->print();
+    } else{
         return 0;
-    }
-
-    }
+    }    }
 }
